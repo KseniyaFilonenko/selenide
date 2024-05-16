@@ -1,9 +1,9 @@
 package com.itacademy;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -23,10 +23,15 @@ public class FirstPage {
         List<String> itemsListTexts = $$(FirstPage.itemsList).texts();
         return itemsListTexts.stream().toList();
     }
+    public static int getIntInProductsFoundLabel() {
+        int foundLabel = Integer.parseInt($(FirstPage.productsFoundLabel).text()
+                .replaceAll("[^\\d]", ""));
+        return foundLabel;
+    }
     public static void addAllItemsToCart() throws InterruptedException {
         ElementsCollection list= $$(addToCartItemsList);
-        for (WebElement items : list){
-            ((JavascriptExecutor)items).executeScript("arguments[0].click();", items);
+        for (SelenideElement items : list){
+            ((JavascriptExecutor)items).executeScript("arguments[0].click();", items.toWebElement());
         }
         Thread.sleep(5000);
     }
