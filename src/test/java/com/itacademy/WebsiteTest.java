@@ -16,15 +16,20 @@ public class WebsiteTest extends BaseTest{
     @Test
     public void addToCart() {
         $(FirstPage.addToCartButton).click();
-        File screenshot = takeScreenShotAsFile();
-        screenshot.renameTo(new File("D:/idea/SelenideProject"));
-        $(FirstPage.firstItem).shouldHave(text(String.valueOf(CartPage.itemInCart)));
+        assertEquals(FirstPage.getFirstItemText(), CartPage.getCartItemText());
     }
-    @Test
+    /*@Test
     public void listOfItems() throws InterruptedException {
         List<String> itemsListTexts = $$(FirstPage.itemsList).texts();
         FirstPage.addAllItemsToCart();
         List<String> itemsInCartTexts = $$(CartPage.itemsListInCart).texts();
+        assertEquals(itemsListTexts, itemsInCartTexts);
+    }*/
+    @Test
+    public void listOfItems() throws InterruptedException {
+        List<String> itemsListTexts = FirstPage.getItemsListTexts();
+        FirstPage.addAllItemsToCart();
+        List<String> itemsInCartTexts = CartPage.getItemsCartListTexts();
         assertEquals(itemsListTexts, itemsInCartTexts);
     }
     @Test
