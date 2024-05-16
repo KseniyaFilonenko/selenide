@@ -5,9 +5,8 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.closeWindow;
-import static org.apache.poi.openxml4j.opc.OPCPackage.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class BaseTest {
     @BeforeTest
