@@ -2,11 +2,13 @@ package com.itacademy;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.List;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Selenide.*;
 
 public class FirstPage {
@@ -20,8 +22,7 @@ public class FirstPage {
         return $(FirstPage.firstItem).getText();
     }
     public static List<String> getItemsListTexts () {
-        List<String> itemsListTexts = $$(FirstPage.itemsList).texts();
-        return itemsListTexts.stream().toList();
+        return $$(itemsList).shouldHave(size(16)).texts();
     }
     public static int getIntInProductsFoundLabel() {
         int foundLabel = Integer.parseInt($(FirstPage.productsFoundLabel).text()
@@ -31,7 +32,8 @@ public class FirstPage {
     public static void addAllItemsToCart() throws InterruptedException {
         ElementsCollection list= $$(addToCartItemsList);
         for (SelenideElement items : list){
-            ((JavascriptExecutor)items).executeScript("arguments[0].click();", items.toWebElement());
+            ((JavascriptExecutor) WebDriverRunner.getWebDriver()).executeScript("arguments[0].click();",
+                    items.toWebElement());
         }
         Thread.sleep(5000);
     }
