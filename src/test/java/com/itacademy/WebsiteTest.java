@@ -1,6 +1,8 @@
 package com.itacademy;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -13,8 +15,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class WebsiteTest extends BaseTest{
-    @BeforeTest
-    public void setUp() {
+    @Test
+    public void setUpAllure() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(false)
                 .savePageSource(true)
@@ -24,7 +26,10 @@ public class WebsiteTest extends BaseTest{
     @Test
     public void addToCart() {
         $(FirstPage.addToCartButton).click();
+        // login();
+        // Allure.attachment("attach", filePath);
         assertEquals(FirstPage.getFirstItemText(), CartPage.getCartItemText());
+
     }
     @Test
     public void listOfItems() throws InterruptedException {
@@ -49,4 +54,9 @@ public class WebsiteTest extends BaseTest{
         int afterFilter = FirstPage.getIntInProductsFoundLabel();
         assertTrue(beforeFilter > afterFilter);
     }
+//    @Step(value = "login")
+//    public void something() {
+//        $(FirstPage.addToCartButton).click();
+//        assertEquals(FirstPage.getFirstItemText(), CartPage.getCartItemText());
+//    }
 }
