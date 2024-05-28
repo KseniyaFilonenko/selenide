@@ -1,5 +1,9 @@
 package com.itacademy;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.List;
@@ -9,6 +13,14 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class WebsiteTest extends BaseTest{
+    @BeforeTest
+    public void setUp() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(false)
+                .savePageSource(true)
+        );
+        SelenideLogger.addListener("local listener", new LocalListener());
+    }
     @Test
     public void addToCart() {
         $(FirstPage.addToCartButton).click();
