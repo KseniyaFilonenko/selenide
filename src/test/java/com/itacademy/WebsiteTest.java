@@ -26,8 +26,6 @@ public class WebsiteTest extends BaseTest{
     @Test
     public void addToCart() {
         $(FirstPage.addToCartButton).click();
-        // login();
-        // Allure.attachment("attach", filePath);
         assertEquals(FirstPage.getFirstItemText(), CartPage.getCartItemText());
 
     }
@@ -54,9 +52,4 @@ public class WebsiteTest extends BaseTest{
         int afterFilter = FirstPage.getIntInProductsFoundLabel();
         assertTrue(beforeFilter > afterFilter);
     }
-//    @Step(value = "login")
-//    public void something() {
-//        $(FirstPage.addToCartButton).click();
-//        assertEquals(FirstPage.getFirstItemText(), CartPage.getCartItemText());
-//    }
 }
